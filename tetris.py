@@ -24,7 +24,7 @@ CELL_SIZE = 30      # Размер одной клетки в пикселях
 # Рассчитываем размер окна игры:
 SCREEN_WIDTH = GRID_WIDTH * CELL_SIZE
 SCREEN_HEIGHT = GRID_HEIGHT * CELL_SIZE
-FPS = 30            # Частота обновления экрана (кадров в секунду)
+FPS = 60            # Частота обновления экрана (кадров в секунду)
 
 # Все возможные фигуры Тетриса (матрицы из 0 и 1)
 PIECES = [
@@ -36,9 +36,8 @@ PIECES = [
     [[1, 1, 0], [0, 1, 1]],      # Z-образная
     [[0, 1, 0], [1, 1, 1]]       # T-образная
 ]
-
+# Созжание игровой сетки
 def create_grid(width, height):
-    """Создает пустое игровое поле"""
     # Создаем список списков (матрицу), заполненную нулями
     return [[0 for _ in range(width)] for _ in range(height)]
 
@@ -82,7 +81,6 @@ def is_valid_move(piece, grid, offset_x, offset_y):
     return True
 
 def place_piece(piece, grid, offset_x, offset_y, color):
-    """Фиксирует фигуру на игровом поле"""
     for y, row in enumerate(piece):
         for x, cell in enumerate(row):
             if cell:
@@ -90,7 +88,6 @@ def place_piece(piece, grid, offset_x, offset_y, color):
                 grid[offset_y + y][offset_x + x] = color
 
 def remove_full_rows(grid):
-    """Удаляет полностью заполненные строки"""
     rows_to_remove = []
     # Ищем заполненные строки
     for i, row in enumerate(grid):
